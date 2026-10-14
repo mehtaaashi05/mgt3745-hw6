@@ -1,15 +1,19 @@
 # HW6: Two Builders, One Specification
 
-> Replace every line in angle brackets. A README that still carries template placeholders loses points.
 
 ## Feature
 
-**Team repository:** <URL of your team repository>
-**Spec provenance:** copied from commit `<full commit hash>` on <YYYY-MM-DD>
+**Team repository:** (https://github.com/mehtaaashi05/mgt3745-team-Alpha-)
 
-**Feature:** <ID and name from your team's FEATURES.md>
+**Spec provenance:** copied from commit d8d60df297c3f0dfee3c06d737bcd880ebb95759 on <2026-10-08>
 
-<Paste the feature's EARS rows here, unchanged. At least three rows, including at least one IF row.>
+**Feature:** F2 Create a trip and invite members (Must-be)
+
+F2-1. WHEN a signed-in person creates a trip with a name, the app shall make them its creator and give them an invite link.
+
+F2-2. IF someone tries to join a trip without a valid invite link, THEN the app shall refuse and show no trip details.
+
+F2-3. The app shall give each trip one reusable invite link. (probe)
 
 ## See It Work
 

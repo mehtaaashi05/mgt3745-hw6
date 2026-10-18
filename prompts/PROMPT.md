@@ -1,11 +1,8 @@
 # PROMPT.md
 
-The exact text both builders received, unchanged between them. Paste it below.
+
 
 ---
-
-# Prompt
-
 Build a small web app that implements the feature "Create a trip and invite members" so that every acceptance criterion below is satisfied, following the style tokens given.
 
 ## Feature: F2 Create a trip and invite members (Must-be)
@@ -57,4 +54,4 @@ Refusals:
 
 ## Retries
 
-<Builder, what you cut, and why. One retry per builder, and record it in that builder's DDR. Leave "None" if there were none.>
+None

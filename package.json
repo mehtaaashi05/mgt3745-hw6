@@ -3,6 +3,27 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test \"evals/*.test.js\""
+    "test": "node --test \"evals/**/*.test.js\""
+  },
+  "version": "1.0.0",
+  "description": "HW6: one F2 spec, two builders (bolt.new and Google AI Studio), compared.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehtaaashi05/mgt3745-hw6.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mehtaaashi05/mgt3745-hw6/issues"
+  },
+  "homepage": "https://github.com/mehtaaashi05/mgt3745-hw6#readme",
+  "devDependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "esbuild": "^0.28.2"
   }
 }

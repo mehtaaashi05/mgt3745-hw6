@@ -19,21 +19,45 @@ F2-3. The app shall give each trip one reusable invite link. (probe)
 
 | bolt.new | AI Studio |
 |---|---|
-| ![bolt build](docs/img/bolt.png) | ![AI Studio build](docs/img/aistudio.png) |
+| ![bolt build](./docs/img/Bolt_F2-1_evidence.png) | ![AI Studio build](./docs/img/aistudio_F2-1_evidence.png) |
 
-<Replace the two images above with your own screenshots, or one side-by-side GIF.>
 
 ## Status
 
-<One or two sentences: how many EARS rows each builder satisfied, and your recommendation in one line.>
+| Row | bolt.new | AI Studio |
+|---|---|---|
+| F2-1 | Partial | Pass |
+| F2-2 | Pass | Pass |
+| F2-3 | Fail | Partial |
+
+Top error: bolt.new's database policy for trip_members recurses forever (Postgres
+42P17), so no joined member can open the trip. AI Studio keeps trips in one
+browser's localStorage, so an invite cannot reach another device.
 
 ## How to Run the Evals
 
-```bash
-npm test
-```
+`npm test` runs `node --test "evals/**/*.test.js"`. The same four tests run against
+both builds. The AI Studio adapter unzips `builds/aistudio.zip` and runs its
+`storage.ts`. The bolt.new adapter calls its live Supabase project using the
+anon key in `scratch/bolt/project/.env` (unzip `builds/bolt.zip` into
+`scratch/bolt` first). It creates throwaway accounts and trips there. Without those
+settings the bolt.new tests are skipped. 
 
-<Say what the test checks and what output to expect.>
+
+These were the results: 
+
+✔ AI Studio F2-1: creator assigned and invite link given (5.56ms)
+✔ AI Studio F2-2: invalid link refused, no trip details (0.68ms)
+✔ AI Studio F2-3: one link, accepted from two different people (0.50ms)
+✔ AI Studio F2-3: a member who joined can then see the trip (0.53ms)
+✔ bolt.new F2-1: creator assigned and invite link given (1509.02ms)
+✔ bolt.new F2-2: invalid link refused, no trip details (328.66ms)
+✔ bolt.new F2-3: one link, accepted from two different people (378.70ms)
+✖ bolt.new F2-3: a member who joined can then see the trip (235.90ms)
+ℹ tests 8 | pass 7 | fail 1
+
+{ code: '42P17', message: 'infinite recursion detected in policy for relation "trip_members"' }
+Run date: October 17, 2026
 
 ## Links
 
@@ -43,13 +67,13 @@ npm test
 - [prompts/PROMPT.md](prompts/PROMPT.md): the exact input both builders received
 - [builds/](builds/): bolt.zip and aistudio.zip
 - [docs/DDR-001.md](docs/DDR-001.md) (bolt.new), [docs/DDR-002.md](docs/DDR-002.md) (AI Studio)
-- Team pull request or issue: <URL>
-- Deployed Worker (only if you completed the proxy step): <URL>
+- Team pull request or issue: [<URL>](https://github.com/mehtaaashi05/mgt3745-team-Alpha-/issues/59)
+
 
 ## Hours
 
-<Total hours spent, with a one-line breakdown.>
+7 hours
 
 ## AI Use
 
-<Every tool that wrote more than a line or two, each with a link to its DDR.>
+Bolt.new [DDR-001](./docs/DDR-001.md) and Google AI Studio [DDR-002](./docs/DDR-002.md) were used for this assignment. I ran every test, made every verdict from my own screenshots, and used a separate person as the second grader.

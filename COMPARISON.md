@@ -2,20 +2,20 @@
 
 ## Row-by-Row Evidence
 
-Pass = the row's behavior was observed working. Partial = part works or works only
-under limits. Fail = not observed or broken. "Reusable" = worked for two people.
+Pass = the row's behavior was observed working. Partial = part works or works only under limits. Fail = not observed or broken. "Reusable" = worked for two people.
 
 | EARS row | bolt.new | Evidence | AI Studio | Evidence |
 |---|---|---|---|---|
-| F2-1 | Partial | Link given; no creator label; trips list errors. screenshots/bolt-f2-1-link.png | Pass | Name-only creation; creator shown; one code. screenshots/aistudio-f2-1-trip.png |
-| F2-2 | Pass | Bad token: "This invite link is not valid", no details. screenshots/bolt-f2-2-refused.png | Pass | Refusal card hides name, dates, members; valid code joins in same tab. screenshots/aistudio-f2-2-refused.png |
-| F2-3 | Fail | join_trip accepts a reused token, but the trip never loads. screenshots/bolt-f2-3-join-error.png | Partial | One code, reused by several users in one browser only. **[CONFIRM: add screenshot of Sam Rivera listed as member]** |
+| F2-1 | Partial | Link given; no creator label! [F2-1 evidence](docs/img/Bolt_F2-1_evidence.png)| Pass | Name-only creation; creator shown; one code. [F2-1 evidence](docs/img/aistudio_F2-1_evidence.png)  |
+| F2-2 | Pass | Bad token: "The invite link is not valid", no details.[F2-2 evidence](docs/img/Bolt_F2-2_evidence.png)| Pass | Refusal card hides name, dates, members; valid code joins in same tab. [F2-2 evidence](docs/img/aistudio_F2-2_evidence.png) |
+| F2-3 | Fail | Two users join with one token (code eval passes), but the joined member cannot read the trip:  | Partial | One code reused by several users, in one browser only. Code eval passes inside one process.|
+
+The manual tests and the code eval agree on every row.
 
 ## Scope Creep
 
-Rule applied to both: a file counts if F2-1 to F2-3 can be met without it.
-Scaffold and config files are excluded. Nothing on the FEATURES.md exclusion list
-was built by either.
+Rule applied to both: a file counts if F2-1 to F2-3 can be met without it. Scaffold and config files are excluded. Neither build made anything on the
+FEATURES.md exclusion list.
 
 | | bolt.new | AI Studio |
 |---|---|---|
@@ -31,21 +31,13 @@ Agreement rate with the second grader: 11 of 12 (92%). Details in JUDGMENT.md.
 ## Findings
 
 **Top finding: AI Studio's invites only work in the browser that made the trip.**
-All trips live in one browser's localStorage. Four attempts from other tabs and
-origins were refused; the same tab joined correctly. This is a design limit, not a
-logic bug, and it contradicts ADR-001, which says a browser-only app cannot share
-a trip between people.
+All trips live in one browser's localStorage. Four attempts from other tabs and origins were refused, and the same tab joined correctly. This is a design limit, not a logic bug, and it contradicts ADR-001, which says a browser-only app cannot share a trip between people.
 
-**Second: bolt.new's join works but its trip view does not.** A valid invite
-joins the member, then "Could not load this trip" appears (2 of 2). The likely
-cause, from the policy code, is that the trips and trip_members read policies
-reference each other. The response body was not read, so this is not confirmed.
-bolt.new's migration header says F2-1 to F2-3 are handled, and its chat said "Your
-app is complete." A builder's self-report is not evidence.
+**Second: bolt.new's join works but its trip view does not.** 
+The code eval shows two users can join with one token, but the next read fails with Postgres error 42P17, infinite recursion in the policy for trip_members. The same cause explains the HTTP 500 on the trip list and the "Could not load this trip" screen. bolt.new's migration header says F2-1 to F2-3 are handled, and its chat said "Your app is complete." A builder's self-report is not evidence. Only one error, the 400 on list_trip_members, is still unexplained.
 
-**Third:** the builders resolved "signed-in" differently (real accounts versus a
-dropdown). AI Studio shipped test scaffolding that reports on its own rows; it
-was not used as evidence.
+**Third:** 
+the builders resolved "signed-in" differently (real accounts versus a dropdown). AI Studio shipped test scaffolding that reports on its own rows. It was not used as evidence.
 
 ## Spec Gaps
 
@@ -62,9 +54,9 @@ was not used as evidence.
 
 ## Recommendation
 
-### Criteria and Weights (commit this section BEFORE scoring)
+### Criteria and Weights 
 
-| Criterion | Weight | Why |
+| Criterion | Weight (1 to 5) | Why |
 |---|---|---|
 | Passes F2-1 to F2-3 | 5 | The rows are the contract. |
 | Refusal shows no trip details (F2-2) | 4 | The only privacy row here. |
@@ -73,7 +65,7 @@ was not used as evidence.
 | Testable offline with node:test | 3 | The team needs repeatable checks. |
 | Style token adherence | 2 | Cheap to fix later. |
 
-### Scores (commit after the weights)
+### Scores
 
 | Criterion | Weight | bolt.new | AI Studio |
 |---|---|---|---|
@@ -87,16 +79,9 @@ was not used as evidence.
 
 ### Decision
 
-Use AI Studio's output as the starting point for F2 in Phase 2, and port it to our
-stack. Its logic is plain TypeScript functions (createNewTrip, joinTripWithCode),
-so it can be tested offline and moved into a Worker. bolt.new's logic is Postgres
-functions and row-level security, which D1 (SQLite) cannot run, and Supabase is a
-second vendor that ADR-001 says needs a new ADR and a TOOLS.md row.
+Use AI Studio's output as the starting point for F2 in Phase 2, and port it to our stack. Its logic is plain TypeScript functions (createNewTrip, joinTripWithCode) that the code eval ran with no browser, so it can be tested offline and moved into a Worker. bolt.new's logic is Postgres functions and row-level security, which D1 (SQLite) cannot run. Its policy bug sits in the layer we would replace, and Supabase is a second vendor, which ADR-001 says needs a new ADR and a TOOLS.md row.
 
-What gets harder: AI Studio has no server, so we must replace localStorage with
-Worker endpoints and D1 tables ourselves, and we own invite validation and
-membership checks. ADR-001 already names these as our security bugs. We must also
-remove the test scaffolding (Reset Data, Simulate Join, persona switcher).
+What gets harder: AI Studio has no server, so we must replace localStorage with Worker endpoints and D1 tables ourselves, and we own invite validation and membership checks. ADR-001 already names these as our security bugs. We must also remove the test scaffolding (Reset Data, Simulate Join, persona switcher).
 
 ## Handoff to the Team
 

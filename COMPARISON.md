@@ -8,7 +8,7 @@ Pass = the row's behavior was observed working. Partial = part works or works on
 |---|---|---|---|---|
 | F2-1 | Partial | Link given; no creator label! [F2-1 evidence](docs/img/Bolt_F2-1_evidence.png)| Pass | Name-only creation; creator shown; one code. [F2-1 evidence](docs/img/aistudio_F2-1_evidence.png)  |
 | F2-2 | Pass | Bad token: "The invite link is not valid", no details.[F2-2 evidence](docs/img/Bolt_F2-2_evidence.png)| Pass | Refusal card hides name, dates, members; valid code joins in same tab. [F2-2 evidence](docs/img/aistudio_F2-2_evidence.png) |
-| F2-3 | Fail | Two users join with one token (code eval passes), but the joined member cannot read the trip:  | Partial | One code reused by several users, in one browser only. Code eval passes inside one process.|
+| F2-3 | Fail | Two users join with one token (code eval passes), but the joined member cannot read the trip: [F2-3 evidence](docs/img/Bolt_F2-3_Evidence.png) | Pass | Users can join with the invite link created. [F2-3 evidence](docs/img/aistudio_F2-3_Evidence.png) 
 
 The manual tests and the code eval agree on every row.
 
@@ -30,13 +30,10 @@ Agreement rate with the second grader: 11 of 12 (92%). Details in JUDGMENT.md.
 
 ## Findings
 
-**Top finding: AI Studio's invites only work in the browser that made the trip.**
-All trips live in one browser's localStorage. Four attempts from other tabs and origins were refused, and the same tab joined correctly. This is a design limit, not a logic bug, and it contradicts ADR-001, which says a browser-only app cannot share a trip between people.
-
-**Second: bolt.new's join works but its trip view does not.** 
+**First: Bolt.new's join works but its trip view does not.**
 The code eval shows two users can join with one token, but the next read fails with Postgres error 42P17, infinite recursion in the policy for trip_members. The same cause explains the HTTP 500 on the trip list and the "Could not load this trip" screen. bolt.new's migration header says F2-1 to F2-3 are handled, and its chat said "Your app is complete." A builder's self-report is not evidence. Only one error, the 400 on list_trip_members, is still unexplained.
 
-**Third:** 
+**Second:** 
 the builders resolved "signed-in" differently (real accounts versus a dropdown). AI Studio shipped test scaffolding that reports on its own rows. It was not used as evidence.
 
 ## Spec Gaps
@@ -71,11 +68,11 @@ the builders resolved "signed-in" differently (real accounts versus a dropdown).
 |---|---|---|---|
 | Passes F2-1 to F2-3 | 5 | 2 | 4 |
 | Refusal shows no details | 4 | 5 | 5 |
-| Fits ADR-001 | 4 | 3 | 2 |
+| Fits ADR-001 | 4 | 3 | 3 |
 | Scope discipline | 3 | 3 | 2 |
 | Testable offline | 3 | 2 | 5 |
 | Style adherence | 2 | 3 | 4 |
-| **Weighted total** | | **63** | **77** |
+| **Weighted total** | | **63** | **81** |
 
 ### Decision
 

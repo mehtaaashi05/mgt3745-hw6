@@ -28,11 +28,10 @@ F2-3. The app shall give each trip one reusable invite link. (probe)
 |---|---|---|
 | F2-1 | Partial | Pass |
 | F2-2 | Pass | Pass |
-| F2-3 | Fail | Partial |
+| F2-3 | Fail | Pass |
 
 Top error: bolt.new's database policy for trip_members recurses forever (Postgres
-42P17), so no joined member can open the trip. AI Studio keeps trips in one
-browser's localStorage, so an invite cannot reach another device.
+42P17), so no joined member can open the trip. 
 
 ## How to Run the Evals
 
@@ -55,8 +54,8 @@ These were the results:
 ✔ bolt.new F2-3: one link, accepted from two different people (378.70ms)
 ✖ bolt.new F2-3: a member who joined can then see the trip (235.90ms)
 ℹ tests 8 | pass 7 | fail 1
-
 { code: '42P17', message: 'infinite recursion detected in policy for relation "trip_members"' }
+
 Run date: October 17, 2026
 
 ## Links

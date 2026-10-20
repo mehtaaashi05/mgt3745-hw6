@@ -27,11 +27,12 @@ Will either platform create dependencies that were not requested in the prompt?
 
 | Rank | Failure | Builder | Frequency | Rows | Cause |
 |---|---|---|---|---|---|
-| 1 | A member who joined cannot read the trip: "Could not load this trip" | bolt.new | 3 of 3 (UI: 2 of 2; code eval: 1 of 1) | F2-3 | Confirmed by the code eval: Postgres 42P17, infinite recursion in the policy for trip_members. |
-| 2 | Trip list returns HTTP 500 ("Could not load your trips") | bolt.new | 2 of 2 (tester1, tester2) | F2-1, F2-3 | Same confirmed cause as rank 1. |
-| 3 | Error and "No trips yet" shown on the same screen | bolt.new | 2 of 2 | F2-1 | A failed load is rendered as an empty list. |
-| 4 | list_trip_members returns HTTP 400 | bolt.new | 1 of 1 | F2-3 | Unconfirmed. Not reproduced in the code eval. |
-| 5 | No creator label shown after creating a trip | bolt.new | 1 of 1 | F2-1 | Not built. |
+| 1 | Invite refused outside the tab/origin that created the trip | AI Studio | 4 of 4 cross-origin attempts | F2-3 | Confirmed in storage.ts: localStorage only, no backend
+| 2 | A member who joined cannot read the trip: "Could not load this trip" | bolt.new | 3 of 3 (UI: 2 of 2; code eval: 1 of 1) | F2-3 | Confirmed by the code eval: Postgres 42P17, infinite recursion in the policy for trip_members. |
+| 3 | Trip list returns HTTP 500 ("Could not load your trips") | bolt.new | 2 of 2 (tester1, tester2) | F2-1, F2-3 | Same confirmed cause as rank 2. |
+| 4 | Error and "No trips yet" shown on the same screen | bolt.new | 2 of 2 | F2-1 | A failed load is rendered as an empty list. |
+| 5 | list_trip_members returns HTTP 400 | bolt.new | 1 of 1 | F2-3 | Unconfirmed. Not reproduced in the code eval. |
+| 6 | No creator label shown after creating a trip | bolt.new | 1 of 1 | F2-1 | Not built. |
 
 Not counted as build failures (test setup, see DDRs):
 - bolt.new preview invite link showed "Connect to Project" and a blank page until the app was published.

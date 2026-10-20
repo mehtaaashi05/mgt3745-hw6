@@ -6,9 +6,9 @@ Pass = the row's behavior was observed working. Partial = part works or works on
 
 | EARS row | bolt.new | Evidence | AI Studio | Evidence |
 |---|---|---|---|---|
-| F2-1 | Partial | Link given; no creator label! [F2-1 evidence](docs/img/Bolt_F2-1_evidence.png)| Pass | Name-only creation; creator shown; one code. [F2-1 evidence](docs/img/aistudio_F2-1_evidence.png)  |
-| F2-2 | Pass | Bad token: "The invite link is not valid", no details.[F2-2 evidence](docs/img/Bolt_F2-2_evidence.png)| Pass | Refusal card hides name, dates, members; valid code joins in same tab. [F2-2 evidence](docs/img/aistudio_F2-2_evidence.png) |
-| F2-3 | Fail | Two users join with one token (code eval passes), but the joined member cannot read the trip: [F2-3 evidence](docs/img/Bolt_F2-3_Evidence.png) | Pass | Users can join with the invite link created. [F2-3 evidence](docs/img/aistudio_F2-3_Evidence.png) 
+| F2-1 | Partial | Link given; no creator label [F2-1 evidence](docs/img/Bolt_F2-1_evidence.png)| Pass | Name-only creation; creator shown; one code. [F2-1 evidence](docs/img/aistudio_F2-1_evidence.png)  |
+| F2-2 | Pass | Bad token: "The invite link is not valid", no details. [F2-2 evidence](docs/img/Bolt_F2-2_evidence.png)| Pass | Refusal card hides name, dates, members; valid code joins in same tab. [F2-2 evidence](docs/img/aistudio_F2-2_evidence.png) |
+| F2-3 | Fail | Two users join with one token (code eval passes), but the joined member cannot read the trip. [F2-3 evidence](docs/img/Bolt_F2-3_Evidence.png) | Pass | Same-browser only: two users joined with one code, but trips live in localStorage, so the code fails from another tab or origin (4 of 4 attempts). No row requires cross-device use; see Spec Gaps, “Where trips live". [F2-3 evidence](docs/img/aistudio_F2-3_Evidence.png) 
 
 The manual tests and the code eval agree on every row.
 
@@ -26,7 +26,7 @@ FEATURES.md exclusion list.
 
 ## Judgment Eval
 
-Agreement rate with the second grader: 11 of 12 (92%). Details in JUDGMENT.md.
+Agreement rate with the classmate: 11 of 12 (92%). Details in JUDGMENT.md.
 
 ## Findings
 

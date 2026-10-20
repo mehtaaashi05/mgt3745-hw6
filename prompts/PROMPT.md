@@ -1,8 +1,5 @@
 # PROMPT.md
 
-
-
----
 Build a small web app that implements the feature "Create a trip and invite members" so that every acceptance criterion below is satisfied, following the style tokens given.
 
 ## Feature: F2 Create a trip and invite members (Must-be)

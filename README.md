@@ -3,7 +3,7 @@
 
 ## Feature
 
-**Team repository:** (https://github.com/mehtaaashi05/mgt3745-team-Alpha-)
+**Team repository:** [Team Repo Link](https://github.com/mehtaaashi05/mgt3745-team-Alpha-)
 
 **Spec provenance:** d8d60df297c3f0dfee3c06d737bcd880ebb95759 committed on 2026-10-08
 
@@ -67,6 +67,7 @@ Run date: October 17, 2026
 - [builds/](builds/): bolt.zip and aistudio.zip
 - [docs/DDR-001.md](docs/DDR-001.md) (bolt.new), [docs/DDR-002.md](docs/DDR-002.md) (AI Studio)
 - Team pull request or issue: [Issue #59](https://github.com/mehtaaashi05/mgt3745-team-Alpha-/issues/59)
+
 
 
 ## Hours

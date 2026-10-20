@@ -9,7 +9,7 @@ Both graders answered the same six Yes/No questions for each build, working alon
 
 ### Evidence Given to the classmate
 - builds/bolt.zip and builds/aistudio.zip (the builds themselves)
-- The published bolt.new app URL and screenshots in docs
+- The published bolt.new app URL and screenshots in docs/img/
 - The three F2 EARS rows, copied unchanged
 - The six questions below, with no "You" column
 

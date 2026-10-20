@@ -5,7 +5,7 @@
 
 **Team repository:** (https://github.com/mehtaaashi05/mgt3745-team-Alpha-)
 
-**Spec provenance:** copied from commit d8d60df297c3f0dfee3c06d737bcd880ebb95759 on <2026-10-08>
+**Spec provenance:** d8d60df297c3f0dfee3c06d737bcd880ebb95759 committed on 2026-10-08
 
 **Feature:** F2 Create a trip and invite members (Must-be)
 
@@ -66,12 +66,12 @@ Run date: October 17, 2026
 - [prompts/PROMPT.md](prompts/PROMPT.md): the exact input both builders received
 - [builds/](builds/): bolt.zip and aistudio.zip
 - [docs/DDR-001.md](docs/DDR-001.md) (bolt.new), [docs/DDR-002.md](docs/DDR-002.md) (AI Studio)
-- Team pull request or issue: [<URL>](https://github.com/mehtaaashi05/mgt3745-team-Alpha-/issues/59)
+- Team pull request or issue: [Issue #59](https://github.com/mehtaaashi05/mgt3745-team-Alpha-/issues/59)
 
 
 ## Hours
 
-7 hours
+6 hours
 
 ## AI Use
 
